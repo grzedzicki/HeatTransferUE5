@@ -5,11 +5,13 @@ Blueprinty:
 CTRL+SCROLL oddalenie/przybliżenie  
 Poruszanie się prawym przyciskiem myszy  
 
-## BP_NodeOwner
-<iframe width=1280 height=650 src="https://blueprintue.com/render/f727j3wk" scrolling="no" allowfullscreen></iframe>
+## BP_Node
+<iframe width=1280 height=650 src="https://blueprintue.com/render/nvo60sd9" scrolling="no" allowfullscreen></iframe>
 
 
-## Create Array Of Nodes
-<iframe width=1280 height=650 src="https://blueprintue.com/render/mljc8b6x/" scrolling="no" allowfullscreen></iframe>
+## Set Node Color
+<iframe width=1280 height=650 src="https://blueprintue.com/render/iku0jj6v/" scrolling="no" allowfullscreen></iframe>
 
 
+## Set Node Color
+<iframe width=1280 height=650 src="https://blueprintue.com/render/8i9_fjm7/" scrolling="no" allowfullscreen></iframe>
