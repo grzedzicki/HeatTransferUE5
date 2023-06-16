@@ -1,6 +1,6 @@
 [Powrót](../README.md)<br />
  
-[Unreal/C++](https://github.com/grzedzicki/HeatTransferUE5/tree/main/ThreadActor) Kod źródłowy
+[Unreal/C++](https://github.com/grzedzicki/HeatTransferUE5/tree/main/ThreadActor/Unreal%20C%2B%2B) Kod źródłowy
   
   
 Blueprinty:
@@ -8,17 +8,19 @@ Blueprinty:
 CTRL+SCROLL oddalenie/przybliżenie  
 Poruszanie się prawym przyciskiem myszy  
 
-## BP_NodeOwner
-<iframe width=1280 height=650 src="https://blueprintue.com/render/f727j3wk" scrolling="no" allowfullscreen></iframe>
+
+## BP_ThreadActor
+<iframe width=1280 height=650 src="https://blueprintue.com/render/zejea3zc/" scrolling="no" allowfullscreen></iframe>
 
 
-## Create Array Of Nodes
-<iframe width=1280 height=650 src="https://blueprintue.com/render/mljc8b6x/" scrolling="no" allowfullscreen></iframe>
+## Calculate Next Step
+<iframe width=1280 height=650 src="https://blueprintue.com/render/t9wtuf49" scrolling="no" allowfullscreen></iframe>
 
 
-## Change Distance Between Nodes
-<iframe width=1280 height=650 src="https://blueprintue.com/render/1kaq6yje/" scrolling="no" allowfullscreen></iframe>
+## Create Thread Reference
+<iframe width=1280 height=650 src="https://blueprintue.com/render/ef7oi9qg/" scrolling="no" allowfullscreen></iframe>
 
 
-## Create Widget
-<iframe width=1280 height=650 src="https://blueprintue.com/render/f_foxows/" scrolling="no" allowfullscreen></iframe>
+## Return New Array
+<iframe width=1280 height=650 src="https://blueprintue.com/render/-fijfrg4/" scrolling="no" allowfullscreen></iframe>
+
