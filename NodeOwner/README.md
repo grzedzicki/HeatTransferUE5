@@ -2,10 +2,12 @@
  
 [Unreal/C++](https://github.com/grzedzicki/ShooterUE4/tree/main/MainCharacter) Kod źródłowy
   
-BP_NodeOwner:  
+Blueprinty:
 
 CTRL+SCROLL oddalenie/przybliżenie  
 Poruszanie się prawym przyciskiem myszy  
+
+## BP_NodeOwner
 <iframe width=1280 height=650 src="https://blueprintue.com/render/f727j3wk" scrolling="no" allowfullscreen></iframe>
 
 Create Array Of Nodes
