@@ -10,5 +10,6 @@ Poruszanie się prawym przyciskiem myszy
 
 
 ## Load Files
+Funkcja w Blueprint otwierająca mapę na podstawie zapisanego pliku.
 <iframe width=1280 height=650 src="https://blueprintue.com/render/03llvc2u/" scrolling="no" allowfullscreen></iframe>
 
