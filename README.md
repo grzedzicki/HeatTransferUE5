@@ -4,6 +4,8 @@
 [Node](/Node/README.md) Obsługa nodów<br />
 [ThreadActor](/ThreadActor/README.md) Klasa UCLASS wywołująca wątek obliczeniowy i przekazująca temperatury<br />
 [ThreadCalculations](/ThreadCalculations/README.md) Klasa FRunnable odpowiedzialna za obliczenia<br />
+[GameInstance](/GameInstance/README.md) Klasa odpowiedzialna za komunikację<br />
+
 
 
 [Github](https://github.com/grzedzicki/HeatTransferUE5) Wszystkie pliki oraz zdjęcia użyte na tej stronie<br />
