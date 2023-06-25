@@ -25,13 +25,13 @@ public:
 		void TalkToInstance();
 
 	UFUNCTION(BlueprintCallable, Category = "Calculations")
-		void InitCalculations(int32 grid_size_1, int32 grid_size_2, int32 grid_size_3, float _alpha, float _delta_x, float _delta_y, float _delta_z, float _delta_t, TArray<float> CalculationArray, TArray<bool> BoolArray);
+		void InitCalculations(int32 grid_size_1, int32 grid_size_2, int32 grid_size_3, int32 heat_array_iteration_value, float _alpha, float _delta_x, float _delta_y, float _delta_z, float _delta_t, TArray<float> CalculationArray, TArray<bool> BoolArray);
 
 	UFUNCTION(BlueprintCallable, Category = "Calculations")
 		bool GetPreviousStep();
 
 	UFUNCTION(BlueprintCallable, Category = "Calculations")
-		bool CheckIfArrayExist(TArray<float> CalculationArray, TArray<bool> BoolArray);
+		bool CheckIfArrayExist(TArray<float> CalculationArray, TArray<bool> BoolArray, int32 heat_array_iteration_value);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TMap<int32, FPassiveData> DataMap;
@@ -57,6 +57,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Calculations")
 		void StartActor();
 
+	UFUNCTION(BlueprintCallable, Category = "Calculations")
+		void SumIterationsValues();
+
 	UFUNCTION(BlueprintCallable, Category = "Files")
 		void CheckSave();
 
@@ -77,9 +80,7 @@ protected:
 
 
 public:	
-
 	class UHeatGameInstance* MyHeatGameInstance;
-
 	UPROPERTY(BlueprintReadWrite, Category = "Settings")
 		UFile_Manager* SaveFileObject;
 
@@ -89,19 +90,27 @@ public:
 	virtual void EndPlay(EEndPlayReason::Type EndPlayReason) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = MapExample)
-		TArray<float> ThreadCalcArray; 
+		TArray<float> ThreadCalcArray; // do zwracania
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = MapExample)
-		TArray<bool> ThreadCalcBoolArray; 
+		TArray<bool> ThreadCalcBoolArray; // do zwracania
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = MapExample)
+		int32 CurrentHeatArrayIterationValue; // do zwracania
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = MapExample)
 		int32 size;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = MapExample)
+		int32 SumIterations;
+
 	void InsertToMap();
 
-	int32 MapIterator = -1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = MapExample)
+		int32 MapIterator = -1;
 
-	int32 UserIterator = -1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = MapExample)
+		int32 UserIterator = -1;
 
 	int32 TempIterator = -1;
 
