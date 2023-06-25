@@ -8,6 +8,9 @@
 #include "ThreadCalculations.h"
 #include "Logging/LogMacros.h"
 
+/*
+    Deklaracja testu jednostkowego
+*/
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FThreadCalculationsTest, "ThreadCalculations.CalculateArray", EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter)
 
 bool FThreadCalculationsTest::RunTest(const FString& Parameters)
@@ -15,12 +18,17 @@ bool FThreadCalculationsTest::RunTest(const FString& Parameters)
     class FThreadCalculations* ThreadCalculations = nullptr;
     ThreadCalculations = new FThreadCalculations();
     int n = 1;
-    TArray<float> ExpectedHeatArray;
+    /*
+        Deklaracja oczekiwanej tablicy, zawiera wartości pochodzące z obliczeń dokonanych w języku Python
+    */
+    TArray<float> ExpectedHeatArray; // 
     ExpectedHeatArray.Init(0, 64);
     ExpectedHeatArray[5] = 100.0f;
     ExpectedHeatArray[21] = 100.0f;
 
-
+    /*
+        Deklaracja tablic, na podstawie których dokonywane są obliczenia
+    */
     TArray<float> TestHeatArray;
     TArray<bool> TestBoolArray;
     TestHeatArray.Init(0, 64);
@@ -28,6 +36,9 @@ bool FThreadCalculationsTest::RunTest(const FString& Parameters)
     TestBoolArray.Init(false, 64);
     TestBoolArray[5] = true;
 
+    /*
+        Deklaracja zmiennych wymaganych do wykonania obliczeń
+    */
     ThreadCalculations->delta_t = 1.0f;
     ThreadCalculations->delta_x = 1.0f;
     ThreadCalculations->delta_y = 1.0f;
@@ -39,12 +50,17 @@ bool FThreadCalculationsTest::RunTest(const FString& Parameters)
     ThreadCalculations->OriginalHeatArray = TestHeatArray;
     ThreadCalculations->NewHeatArray = TestHeatArray;
     ThreadCalculations->BoolArray = TestBoolArray;
-  
-    for (int i = 0; i < n; i++) {
-        ThreadCalculations->CalculateArray();
-        ThreadCalculations->OriginalHeatArray = ThreadCalculations->NewHeatArray;
-    }
 
+    /*
+        Deklaracja ilości iteracji obliczeń oraz wywołanie samych obliczeń
+    */
+    ThreadCalculations->heat_array_iteration_value = 1;
+    ThreadCalculations->CalculateArray();
+
+    /*
+        Porównanie oczekiwanych wyników z otrzymanymi
+        Jeśli obie tablice są takie same, test zwraca prawdę, w przeciwnym wypadku fałsz.
+    */
     TestEqual("Calculations Test", ExpectedHeatArray, ThreadCalculations->OriginalHeatArray);
 
     return true;
