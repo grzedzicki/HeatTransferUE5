@@ -17,6 +17,10 @@ AThreadActor::AThreadActor()
 
 }
 
+    /*
+       Funkcja dostępna w Blueprintach, która otrzymuje parametry, siatkę temperatur oraz siatkę boolowską stałych 
+       wartości i wywołująca klasę ThreadCalculations zajmującą się dokonywaniem obliczeń temperatury.
+    */
 void AThreadActor::InitCalculations(int32 grid_size_1, int32 grid_size_2, int32 grid_size_3, int32 heat_array_iteration_value, float alpha, float delta_x, float delta_y, float delta_z, float delta_t, TArray<float> CalculationArray, TArray<bool> BoolArray)
 {
 	UE_LOG(LogTemp, Warning, TEXT("AThreadActor::InitCalculations"));
@@ -27,6 +31,9 @@ void AThreadActor::InitCalculations(int32 grid_size_1, int32 grid_size_2, int32 
 	}
 }
 
+    /*
+	Funkcja wyświelająca poprzednią iterację obliczeń.
+    */
 bool AThreadActor::GetPreviousStep()
 {
 	if(DataMap.Num() < 1) return false;
@@ -39,6 +46,9 @@ bool AThreadActor::GetPreviousStep()
 	return true;
 }
 
+    /*
+	Funkcja wyświelająca następną iterację obliczeń, jeśli takowe miały miejsce.
+    */
 void AThreadActor::GetNextStep()
 {
 	UE_LOG(LogTemp, Warning, TEXT("GetNextStep: Current UserIterator: %d"), UserIterator);
@@ -49,6 +59,9 @@ void AThreadActor::GetNextStep()
 
 }
 
+    /*
+	Funkcja zapisująca zmiany w siatce do tablic tymczasowych.
+    */
 void AThreadActor::SaveToTemp(TArray<float> CalculationArray, TArray<bool> BoolArray)
 {
 	TempIterator++;
@@ -58,6 +71,9 @@ void AThreadActor::SaveToTemp(TArray<float> CalculationArray, TArray<bool> BoolA
 	ArraysToTemp.HeatArrayIterationValue = CurrentHeatArrayIterationValue;
 	TempDataMap.Add(TempIterator, ArraysToTemp);
 
+    /*
+	Funkcja usuwająca wszystkie tablice.
+    */
 void AThreadActor::ResetDataInC()
 {
 	for (int i = DataMap.Num() - 1; i >= 0; i--)
@@ -70,6 +86,9 @@ void AThreadActor::ResetDataInC()
 	TempIterator = -1;
 }
 
+    /*
+	Funkcja wczytująca poprzednie dane. (CTRL+Z)
+    */
 bool AThreadActor::ReadFromTempBackwards()
 {
 	if (TempIterator == 0) return false;
@@ -82,6 +101,10 @@ bool AThreadActor::ReadFromTempBackwards()
 	return true;
 }
 
+    /*
+	Funkcja wyświelająca kolejne dane, jeśli takie istnieją oraz
+ 	pod warunkiem, że nie dokonano żadnych zmian w siatce. (CTRL+Y)
+    */
 bool AThreadActor::ReadFromTempFurther(TArray<float> CalculationArray, TArray<bool> BoolArray)
 {
 	if (TempIterator == TempDataMap.Num() - 1) { 
@@ -100,6 +123,9 @@ bool AThreadActor::ReadFromTempFurther(TArray<float> CalculationArray, TArray<bo
 	return true;
 }
 
+    /*
+	Funkcja wywoływana w celu zapisania pustej siatki na indeksie 0.
+    */
 void AThreadActor::StartActor()
 {
 	_grid_size_1 = MyHeatGameInstance->Grid_Size_1;
@@ -121,6 +147,9 @@ void AThreadActor::StartActor()
 	TempIterator = UserIterator;
 }
 
+    /*
+	Funkcja wykorzystywana podczas debugowania w celu sprawdzenia działania zapisu/odczytu plików.
+    */
 void AThreadActor::CheckSave()
 {
 	USaveGame* LoadedGame = UGameplayStatics::LoadGameFromSlot("MySave", 0);
@@ -142,6 +171,9 @@ void AThreadActor::CheckSave()
 }
 
 
+    /*
+	Metoda sumująca ilość wykonanych iteracji w zależności od aktualnie wyświetlanej siatki
+    */
 void AThreadActor::SumIterationsValues()
 {
 	int32 value = 0;
@@ -157,6 +189,9 @@ void AThreadActor::SumIterationsValues()
 	SumIterations = value;
 }
 
+    /*
+	Funkcja przekazująca GameInstance TMapę zawierającą wszystkie dokonane obliczenia
+    */
 void AThreadActor::SaveDataToFile()
 {
 	UE_LOG(LogTemp, Warning, TEXT("DataMap.Num: %d"), DataMap.Num());
@@ -164,6 +199,9 @@ void AThreadActor::SaveDataToFile()
 	MyHeatGameInstance->SaveFile(DataMap);
 }
 
+    /*
+	Funkcja wczytująca dane z pliku korzystająca z GameInstance
+    */
 void AThreadActor::LoadDataFromFile()
 {
 	DataMap = MyHeatGameInstance->DataFromFile;
@@ -179,6 +217,9 @@ void AThreadActor::LoadDataFromFile()
 	CurrentHeatArrayIterationValue = DataMap[MapIterator].HeatArrayIterationValue;
 }
 
+    /*
+	Funkcja wyszukująca indeksu podanej siatki
+    */
 int32 AThreadActor::FindValueInMap(TArray<float> CalculationArray, TArray<bool> BoolArray)
 {
 	for (auto& Elem : DataMap) {
@@ -188,6 +229,11 @@ int32 AThreadActor::FindValueInMap(TArray<float> CalculationArray, TArray<bool> 
 	return -1;
 }
 
+    /*
+	Funkcja wywoływana w momencie, gdy znajdujemy się przykładowo w "Iteracji 2/3" i chcemy wyświetlić siatkę 3/3
+ 	Sprawdza ona czy obecnie wyświetlana siatka jest zgodna z zapisaną siatką.
+  	Jeśli tak, to wyświtla kolejną siatkę, a jeśli nie to usuwa wszystkie iteracje po obecnej i dokonuje nowych obliczeń od tej iteracji.
+    */
 bool AThreadActor::CheckIfArrayExist(TArray<float> CalculationArray, TArray<bool> BoolArray, int32 heat_array_iteration_value)
 {
 	if (ReadBackWasUsed) {
@@ -221,6 +267,9 @@ bool AThreadActor::CheckIfArrayExist(TArray<float> CalculationArray, TArray<bool
 	return false;
 }
 
+    /*
+	Funkcja usuwająca dane, w przypadku jeśli zmianiła się siatka
+    */
 void AThreadActor::DeleteFurtherData()
 {
 	for (int i = UserIterator+1; i < DataMap.Num(); i++)
@@ -242,6 +291,10 @@ void AThreadActor::TalkToInstance()
 	UE_LOG(LogTemp, Warning, TEXT("Answer from instance: %s"), *FString(MyHeatGameInstance->SaveFileName));
 }
 
+    /*
+	Funkcja wywoływana w przypadku dokonania nowych obliczeń siatki
+ 	Przekazuje ona siatkę temperatur, siatkę boolowską oraz wartość iteracji
+    */
 void AThreadActor::InsertToMap()
 {
 	MapIterator++;
@@ -259,6 +312,9 @@ void AThreadActor::InsertToMap()
 	TempDataMap.Add(TempIterator, Arrays);
 }
 
+    /*
+	Funkcja usuwająca wartości tymczasowe
+    */
 void AThreadActor::DeleteFurtherTemp()
 {
 	for (int i = TempIterator; i < TempDataMap.Num(); i++)
@@ -272,6 +328,9 @@ void AThreadActor::Tick(float DeltaTime)
 
 }
 
+    /*
+	Funkcja usuwająca wątek obliczeniowy
+    */
 void AThreadActor::EndPlay(EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
