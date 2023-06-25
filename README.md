@@ -9,6 +9,6 @@
 
 
 [Github](https://github.com/grzedzicki/HeatTransferUE5) Repozytorium Github<br />
-[Gra](https://drive.google.com/file/d/1BN9h0tFj6CCVj1jQGZcUJJSszosvIkIQ/view) .7z Gotowa aplikacja<br />
+[Aplikacja](https://drive.google.com/file/d/1oZY5s6gmUH6Av7fNp-Lqz60nifLaFieM/view) .7z Gotowa aplikacja do pobrania z Google Drive<br />
 
 Wszelkie przestawienia węzłów w Blueprintach są wynikiem sposobu działania strony
