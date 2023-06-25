@@ -34,8 +34,6 @@ void UHeatGameInstance::LoadFile(FString FileName)
 		Long_distance = OpenFileObject->long_distance;
 		Big_size = OpenFileObject->big_size;
 		Node_size = OpenFileObject->node_size;
-		UE_LOG(LogTemp, Warning, TEXT("In instance"), );
-		UE_LOG(LogTemp, Warning, TEXT("Instance Value: %d"), DataFromFile.Num());
 	}
 }
 
@@ -56,7 +54,6 @@ void UHeatGameInstance::SaveFile(TMap<int32, FPassiveData> DataToSave)
 	SaveFileObject->long_distance = Long_distance;
 	SaveFileObject->big_size = Big_size;
 	SaveFileObject->node_size = Node_size;
-	
 	if(UGameplayStatics::SaveGameToSlot(SaveFileObject, SaveFileName, 0))
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Saved Data To File"));
 	else
