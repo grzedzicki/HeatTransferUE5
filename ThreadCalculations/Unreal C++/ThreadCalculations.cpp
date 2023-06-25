@@ -5,6 +5,10 @@
 #include "..\Public\ThreadCalculations.h"
 #include "ThreadActor.h"
 
+
+/*
+	Przepisanie zmiennych otrzymanych z klasy ThreadActor
+*/
 FThreadCalculations::FThreadCalculations(int32 _grid_size_1, int32 _grid_size_2, int32 _grid_size_3, int32 _heat_array_iteration_value, float _alpha, float _delta_x, float _delta_y, float _delta_z, float _delta_t, TArray<float> _CalculationArray, TArray<bool> _BoolArray, AThreadActor* FunActor)
 {
 	if (FunActor) {
@@ -34,6 +38,10 @@ bool FThreadCalculations::Init()
 	return true;
 }
 
+/*
+	Funkcja wywoływana automatycznie po wywołaniu klasy
+ 	Dokonanie obliczeń temperatury oraz zwrót wyników do ThreadActor
+*/
 uint32 FThreadCalculations::Run()
 {
 	CalculateArray();
@@ -50,6 +58,9 @@ void FThreadCalculations::Stop()
 {
 }
 
+/*
+	Metoda dokonująca obliczeń temperatur
+*/
 void FThreadCalculations::CalculateArray()
 {
 	gamma = alpha * delta_t;
@@ -66,14 +77,21 @@ void FThreadCalculations::CalculateArray()
 	UE_LOG(LogTemp, Display, TEXT("FThreadCalculations::CalculateArray Finished"));
 
 }
-										           
+
+/*
+	Odczytywanie temperatury z oryginalej tablicy
+*/
 float FThreadCalculations::ReadArray(int num_tablicy, int i, int j)
 {
-	int index = num_tablicy * grid_size_2 * grid_size_3 + i * grid_size_2 + j; // jesli x jest wieksze
+	int index = num_tablicy * grid_size_2 * grid_size_3 + i * grid_size_2 + j;
 
 	return OriginalHeatArray[index];
 }
 
+/*
+	Zapisywanie nowych wartości temperatur do nowej tablicy, pod warunkiem, że
+ 	dany węzeł nie miał ustalonej stałej wartości temperatury
+*/
 void FThreadCalculations::SetArray(int num_tablicy, int i, int j, float value)
 {
 	int index = num_tablicy * grid_size_2 * grid_size_3 + i * grid_size_2 + j;
@@ -83,6 +101,9 @@ void FThreadCalculations::SetArray(int num_tablicy, int i, int j, float value)
 	else return;
 }
 
+/*
+	Wyświetlanie tablicy, wykorzystywane przy debugowaniu
+ */
 void FThreadCalculations::PrintArray()
 {
 	UE_LOG(LogTemp, Warning, TEXT("FThreadCalculations::PrintArray"));
@@ -94,4 +115,3 @@ void FThreadCalculations::PrintArray()
 		UE_LOG(LogTemp, Warning, TEXT("%f"), NewHeatArray[i]);
 	}
 }
-
