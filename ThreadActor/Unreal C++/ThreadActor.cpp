@@ -20,10 +20,6 @@ AThreadActor::AThreadActor()
 void AThreadActor::InitCalculations(int32 grid_size_1, int32 grid_size_2, int32 grid_size_3, int32 heat_array_iteration_value, float alpha, float delta_x, float delta_y, float delta_z, float delta_t, TArray<float> CalculationArray, TArray<bool> BoolArray)
 {
 	UE_LOG(LogTemp, Warning, TEXT("AThreadActor::InitCalculations"));
-	UE_LOG(LogTemp, Warning, TEXT("%f"), alpha);
-	UE_LOG(LogTemp, Warning, TEXT("%f"), delta_x);
-	UE_LOG(LogTemp, Warning, TEXT("%f"), delta_t);
-	UE_LOG(LogTemp, Warning, TEXT("___________"));
 	if (grid_size_1 > 0) {
 		_grid_size_1 = grid_size_1;
 		CalcThread = new FThreadCalculations(grid_size_1, grid_size_2, grid_size_3, heat_array_iteration_value, alpha, delta_x, delta_y, delta_z, delta_t, CalculationArray, BoolArray, this);
@@ -35,8 +31,6 @@ bool AThreadActor::GetPreviousStep()
 {
 	if(DataMap.Num() < 1) return false;
 	if (UserIterator == 0) return false;
-	UE_LOG(LogTemp, Warning, TEXT("GetPreviousStepCurrent UserIterator: %d"), UserIterator);
-	UE_LOG(LogTemp, Warning, TEXT("Current MaxDataMap: %d"), DataMap.Num());
 	UserIterator--;
 	ThreadCalcArray = DataMap[UserIterator].HeatArrayFromMap;
 	ThreadCalcBoolArray = DataMap[UserIterator].BoolArrayFromMap;
@@ -63,9 +57,6 @@ void AThreadActor::SaveToTemp(TArray<float> CalculationArray, TArray<bool> BoolA
 	ArraysToTemp.BoolArrayFromMap = BoolArray;
 	ArraysToTemp.HeatArrayIterationValue = CurrentHeatArrayIterationValue;
 	TempDataMap.Add(TempIterator, ArraysToTemp);
-	UE_LOG(LogTemp, Warning, TEXT("Saved to Temp"), );
-	UE_LOG(LogTemp, Warning, TEXT("Current TempIterator: %d"), TempIterator);
-}
 
 void AThreadActor::ResetDataInC()
 {
