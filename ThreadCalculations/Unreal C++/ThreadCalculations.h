@@ -12,6 +12,7 @@ class FThreadCalculations : public FRunnable
 {
 	
 public:	
+	//Wywołanie  klasy dokonującej obliczeń temperatury
 	FThreadCalculations(int32 grid_size_1, int32 grid_size_2, int32 grid_size_3, int32 heat_array_iteration_value, float _alpha, float _delta_x, float _delta_y, float _delta_z, float _delta_t, TArray<float> CalculationArray, TArray<bool> BoolArray, AThreadActor* FunActor);
 	FThreadCalculations();
 	bool bStopThread;
