@@ -17,7 +17,6 @@ bool FThreadCalculationsTest::RunTest(const FString& Parameters)
 {
     class FThreadCalculations* ThreadCalculations = nullptr;
     ThreadCalculations = new FThreadCalculations();
-    int n = 1;
     /*
         Deklaracja oczekiwanej tablicy, zawiera wartości pochodzące z obliczeń dokonanych w języku Python
     */
