@@ -18,3 +18,8 @@ Na podstawie wartości temperatury ustalany jest kolor.
 ## Set New Temperature
 Po otrzymaniu nowych wartości, node aktualizuje swoje zmienne oraz kolor.
 <iframe width=1280 height=650 src="https://blueprintue.com/render/5f1veaz5/" scrolling="no" allowfullscreen></iframe>
+
+
+## Rotate Text
+Obraca tekst z wartością temperatury w kierunku kamery.
+<iframe width=1280 height=650 src="https://blueprintue.com/render/3qqrh1yf/" scrolling="no" allowfullscreen></iframe>
